@@ -1,0 +1,34 @@
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);
+
+$blog-z-index: (
+  sidebar: 100
+);
+
+.blog-sidebar{
+  z-index: map-get($blog-z-index, sidebar);
+  width: 60px;
+  height: 100vh;     
+  padding: 0;
+  color: #fff;
+  background: #2f353a;     
+  transition: margin-left .25s, margin-right .25s, width .25s, flex .25s, -ms-flex .25s;
+
+  @media (min-width: map-get($grid-breakpoints, lg)) {
+    width: 200px;
+  }
+
+  &-show {
+    width: 200px;
+  }
+
+  &-hide {
+    width:60px;
+  }
+}
+
