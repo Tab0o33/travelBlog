@@ -1,0 +1,13 @@
+@import "../../styles.scss";
+
+
+.blog-right-side {
+    width: calc(100vw - 60px);  
+    margin-left: 60px; 
+    transition: margin-left .25s, margin-right .25s, width .25s, flex .25s, -ms-flex .25s;
+
+    &-right {
+        margin-left: 200px; 
+        width: calc(100vw - 200px);   
+    }
+}

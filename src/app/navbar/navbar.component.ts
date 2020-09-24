@@ -1,26 +1,22 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Input } from '@angular/core';
+import { Component, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
-  // @Output() sideBar: EventEmitter<any> = new EventEmitter();
+  @ViewChild('sidebar') sidebar: ElementRef;
 
-  showSideBar = true;
-  alreadyToggled = false;
+  @Input() sideBarOpen: boolean;
+  @Output() toggleSideBar: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
-  ngOnInit() {
-  }
-
   toggleShowSideBar() {
-    this.alreadyToggled = true;
-    this.showSideBar = !this.showSideBar;
-    // this.sideBar.emit();
+    this.toggleSideBar.emit();
   }
 
 }
