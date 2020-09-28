@@ -1,0 +1,15 @@
+<div #sidebar class="navbar-dark blog-sidebar bg-secondary d-flex flex-column justify-content-start align-items-stretch"
+    [ngClass]="{'blog-sidebar-show': sideBarOpen}">
+    <div class="d-flex justify-content-end">
+        <button class="navbar-toggler" type="button" (click)="toggleShowSideBar()">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+
+    <div class="navbar-nav mt-4">
+        <a *ngFor="let item of items" class="nav-item nav-link d-flex" [ngClass]="{'justify-content-center':!sideBarOpen}" href="#">
+            <span class="material-icons" [ngClass]="{'ml-2':true,'mr-2':sideBarOpen}">{{item.icon}}</span>
+            <span *ngIf="sideBarOpen">{{item.label}}</span>
+        </a>
+    </div>
+</div>
