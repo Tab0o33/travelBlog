@@ -7,9 +7,12 @@
     </div>
 
     <div class="navbar-nav mt-4">
-        <a *ngFor="let item of items" class="nav-item nav-link d-flex" [ngClass]="{'justify-content-center':!sideBarOpen}" href="#">
-            <span class="material-icons" [ngClass]="{'ml-2':sideBarOpen,'mr-2':sideBarOpen}">{{item.icon}}</span>
-            <span *ngIf="sideBarOpen">{{item.label}}</span>
-        </a>
+        <li routerLinkActive="active">
+            <a *ngFor="let item of items" class="nav-item nav-link d-flex"
+                [ngClass]="{'justify-content-center':!sideBarOpen}" [routerLink]="item.link">
+                <span class="material-icons" [ngClass]="{'ml-2':sideBarOpen,'mr-2':sideBarOpen}">{{item.icon}}</span>
+                <span *ngIf="sideBarOpen">{{item.label}}</span>
+            </a>
+        </li>
     </div>
 </div>
