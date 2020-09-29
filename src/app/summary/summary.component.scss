@@ -1,0 +1,15 @@
+.card {
+    box-shadow:0 4px 10px 0 rgba(0,0,0,0.2),0 4px 20px 0 rgba(0,0,0,0.19);
+    margin:16px!important;
+    color:#000!important;
+    background-color:#fff!important;
+    width: 220px;
+
+    &:hover {
+        box-shadow:0 8px 20px 0 rgba(0,0,0,0.2),0 8px 40px 0 rgba(0,0,0,0.19);
+    }
+
+    &-img {
+        height: 110px;
+    }
+}

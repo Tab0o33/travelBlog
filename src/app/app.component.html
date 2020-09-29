@@ -1,4 +1,4 @@
-<div #body class="bg-light" (window:resize)="resize()">
+<div #body (window:resize)="resize()">
 
   <app-sidebar [sideBarOpen]="sideBarOpen" (toggleSideBar)="toggleSideBar()"></app-sidebar>
   <app-container [containerleft]="containerleft"></app-container>

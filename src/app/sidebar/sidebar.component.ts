@@ -14,10 +14,10 @@ export class SidebarComponent {
   @Output() toggleSideBar: EventEmitter<any> = new EventEmitter();
 
   items = [
-    { icon: 'home', label: 'Home' },
-    { icon: 'menu_book', label: 'Sommaire' },
-    { icon: 'public', label: 'Pays' },
-    { icon: 'photo', label: 'Galerie' }
+    { icon: 'home', label: 'Home', link: 'home' },
+    { icon: 'menu_book', label: 'Sommaire', link: 'summary' },
+    { icon: 'public', label: 'Pays', link: 'countries' },
+    { icon: 'photo', label: 'Galerie', link: 'gallery' }
   ];
 
   constructor() { }
