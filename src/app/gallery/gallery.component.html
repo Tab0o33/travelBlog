@@ -1,0 +1,40 @@
+<h2>Responsive Image Gallery</h2>
+<h4>Colombie</h4>
+<div class="px-3">
+  <div class="container gallery">
+    <div class="row">
+      <div *ngFor="let item of items" data-toggle="modal" data-target="#myModal"
+        class="picture-block col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 py-2 img-thumbnail shadow-sm"
+        (click)="displayItem(item)">
+        <img *ngIf="item.type == 'picture'" [src]="'/assets/'+ item.name" [alt]="item.alt">
+        <div *ngIf="item.type == 'video'" class="containerAll">
+          <img class="box" [src]="'/assets/'+ item.image" [alt]="item.alt">
+          <div class="video-play box stack-top d-flex justify-content-center align-items-center">
+            <span class="material-icons md-48">
+              play_circle_filled
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isModalOpen" class="modal fade show" id="myModal" role="dialog" data-backdrop="static">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" (click)="isModalOpen = false">&times;</button>
+      </div>
+      <div class="modal-body">
+        <img *ngIf="selectedItem && selectedItem.type == 'picture'"
+          [src]="selectedItem ? '/assets/'+ selectedItem.name : ''" [alt]="selectedItem ? selectedItem.alt: ''"
+          class="rounded mx-auto d-block">
+        <video *ngIf="selectedItem && selectedItem.type == 'video'" class="modal-video" controls>
+          <source src="/assets/bresil.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+  </div>
+</div>

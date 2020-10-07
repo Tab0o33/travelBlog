@@ -1,0 +1,58 @@
+@import "../../styles.scss";
+
+.picture-block{
+  height: 150px;
+}
+@media (max-width: 575px) {
+    .picture-block{
+      width: 150px;
+    }
+}
+
+.modal-video{
+  width: 100%;
+  height: 100%;
+}
+
+.gallery img{
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+
+  &:hover{
+    opacity: 1;
+    cursor: pointer;
+  }
+}
+
+.modal img{
+  width: 90%;
+}
+
+.gallery video{
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+}
+
+.containerAll{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.box{          
+  width: 100%;
+  height: 100%;
+  position: absolute;
+
+}
+.stack-top{
+  z-index: 9;
+}
+
+.video-play{
+  &:hover{
+    opacity: 1;
+    cursor: pointer;
+  }
+}
