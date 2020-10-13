@@ -13,3 +13,14 @@
         height: 110px;
     }
 }
+
+.blog-btn-add{
+    position: -webkit-sticky;
+    position: sticky;
+    top: calc(100vh - 90px);
+    left: calc(100vw - 140px);
+    width: 50px; 
+    height: 50px; 
+    border-radius: 25px; 
+    box-shadow: 5px 5px 10px gray;
+}

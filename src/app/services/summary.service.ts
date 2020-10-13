@@ -10,6 +10,7 @@ export class SummaryService {
     countriesSubject = new Subject<any[]>();
 
     private countries = [];
+    private summaryCards = [];
 
     constructor(private http: HttpClient) { }
 
@@ -22,7 +23,8 @@ export class SummaryService {
             .get<any[]>('http://localhost:3000/api/summaryCard')
             .subscribe(
                 (response) => {
-                    this.countries = this.mapAndOrderData(response);
+                    this.summaryCards = response;
+                    this.countries = this.mapAndOrderData(this.summaryCards);
                     this.emitCountriesSubject();
                 },
                 (error) => {
@@ -42,11 +44,21 @@ export class SummaryService {
 
         for (const card of summaryCards) {
             if (!countries.find(c => c.label === card.country)) {
-                countries.push({label: card.country, places: []});
+                countries.push({ label: card.country, places: [] });
             }
             countries.find(c => c.label === card.country).places.push(card);
         }
         return countries;
+    }
+
+    postNewSummaryCard(cardInfo: any, image: File) {
+        const cardDate = new FormData();
+        cardDate.append('summaryCard', JSON.stringify(cardInfo));
+        cardDate.append('image', image, cardInfo.title);
+        return this.http.post('http://localhost:3000/api/summaryCard',
+            cardDate,
+            { headers: { Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjgwYzA3OTgzZDI5ODY0MmM4NTBhYmQiLCJpYXQiOjE2MDI1ODkzNDgsImV4cCI6MTYwMjY3NTc0OH0.HWuJyszcFPNEa3Hz1tAynFY1Bs7OcOrd5-x8QvG7Mzc' } }
+        );
     }
 
 }
