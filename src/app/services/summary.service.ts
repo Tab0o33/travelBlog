@@ -57,8 +57,25 @@ export class SummaryService {
         cardDate.append('image', image, cardInfo.title);
         return this.http.post('http://localhost:3000/api/summaryCard',
             cardDate,
-            { headers: { Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjgwYzA3OTgzZDI5ODY0MmM4NTBhYmQiLCJpYXQiOjE2MDI1ODkzNDgsImV4cCI6MTYwMjY3NTc0OH0.HWuJyszcFPNEa3Hz1tAynFY1Bs7OcOrd5-x8QvG7Mzc' } }
+            { headers: { Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjgwYzA3OTgzZDI5ODY0MmM4NTBhYmQiLCJpYXQiOjE2MDI2Nzc4NDgsImV4cCI6MTYwMjc2NDI0OH0.zg_C_5x9X_g7RpRJsqpq4p0LS7eRU2VFwJsKzBs-IB0' } }
         );
+    }
+
+    deleteSummaryCard(cardId: string): Observable<any> {
+        const apiCall = this.http.delete(`http://localhost:3000/api/summaryCard/${cardId}`,
+            { headers: { Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjgwYzA3OTgzZDI5ODY0MmM4NTBhYmQiLCJpYXQiOjE2MDI2Nzc4NDgsImV4cCI6MTYwMjc2NDI0OH0.zg_C_5x9X_g7RpRJsqpq4p0LS7eRU2VFwJsKzBs-IB0' } }
+        );
+        apiCall.subscribe(
+            () => {
+                this.summaryCards = this.summaryCards.filter(card => card._id !== cardId);
+                this.countries = this.mapAndOrderData(this.summaryCards);
+                this.emitCountriesSubject();
+            },
+            (err) => {
+                console.log(err);
+            },
+        );
+        return apiCall;
     }
 
 }

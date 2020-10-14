@@ -1,4 +1,4 @@
-<button routerLink="new-card" type="button" class="btn bg-primary blog-btn-add  d-flex justify-content-center">
+<button routerLink="new-card" type="button" class="btn bg-primary blog-btn-add d-flex justify-content-center">
     <span class="material-icons md-36">
         add_circle_outline
     </span>
@@ -13,14 +13,37 @@
             <div class="row">
 
                 <div *ngFor="let place of country.places" class="card p-2">
+                    <button type="button" class="btn bg-danger d-flex justify-content-center deleteIcon" data-toggle="modal" data-target="#deleteModal" (click)="selctPlaceAndOpenModal(place)">
+                        <span class="material-icons">
+                            delete
+                        </span>
+                    </button>
                     <img class="card-img" [src]="place.imageUrl" [alt]="place.imageAlt">
                     <h4><b>{{place.title}}</b></h4>
                     <p class="font-weight-bold">{{place.description}}</p>
-                    <p class="font-weight-bold text-secondary font-italic">{{place.firstDay}} - {{place.lastday}}</p>
+                    <p class="font-weight-bold text-secondary font-italic">{{place.firstDay}} - {{place.lastDay}}</p>
                     <div>
                         <button type="button" class="btn btn-outline-secondary">Détails »</button>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="isModalOpen" class="modal fade show" id="deleteModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                Voulez-vous vraiment supprimer cette carte du sommaire ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteCard(selectedCard)">Confirmer</button>
             </div>
         </div>
     </div>

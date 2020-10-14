@@ -1,12 +1,12 @@
 .card {
-    box-shadow:0 4px 10px 0 rgba(0,0,0,0.2),0 4px 20px 0 rgba(0,0,0,0.19);
-    margin:16px!important;
-    color:#000!important;
-    background-color:#fff!important;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 16px !important;
+    color: #000 !important;
+    background-color: #fff !important;
     width: 220px;
 
     &:hover {
-        box-shadow:0 8px 20px 0 rgba(0,0,0,0.2),0 8px 40px 0 rgba(0,0,0,0.19);
+        box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.2), 0 8px 40px 0 rgba(0, 0, 0, 0.19);
     }
 
     &-img {
@@ -14,13 +14,23 @@
     }
 }
 
-.blog-btn-add{
+.deleteIcon {
+    width: 50px;
+    position: absolute ;
+    left: 90%;
+    top: -7%;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+
+.blog-btn-add {
     position: -webkit-sticky;
     position: sticky;
     top: calc(100vh - 90px);
     left: calc(100vw - 140px);
-    width: 50px; 
-    height: 50px; 
-    border-radius: 25px; 
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
     box-shadow: 5px 5px 10px gray;
 }

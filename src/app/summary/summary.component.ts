@@ -13,6 +13,9 @@ export class SummaryComponent implements OnInit, OnDestroy {
     countries: any = [];
     countriesSubscription: Subscription;
 
+    isModalOpen = false;
+    selectedCard: any;
+
     constructor(private summaryService: SummaryService) { }
 
     ngOnInit(): void {
@@ -22,6 +25,15 @@ export class SummaryComponent implements OnInit, OnDestroy {
             }
         );
         this.summaryService.getSummaryCards();
+    }
+
+    selctPlaceAndOpenModal(card: any) {
+        this.selectedCard = card;
+        this.isModalOpen = true;
+    }
+
+    deleteCard(card: any) {
+        this.summaryService.deleteSummaryCard(card._id);
     }
 
     ngOnDestroy() {
