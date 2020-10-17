@@ -1,6 +1,7 @@
 import { OnDestroy } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 import { SummaryService } from '../services/summary.service';
 
 @Component({
@@ -13,12 +14,19 @@ export class SummaryComponent implements OnInit, OnDestroy {
     countries: any = [];
     countriesSubscription: Subscription;
 
+    isAuth: boolean;
+    
     isModalOpen = false;
     selectedCard: any;
 
-    constructor(private summaryService: SummaryService) { }
+    constructor(
+        private summaryService: SummaryService,
+        private authService: AuthService
+    ) { }
+
 
     ngOnInit(): void {
+        this.isAuth = this.authService.isLoggedIn();
         this.countriesSubscription = this.summaryService.countriesSubject.subscribe(
             (countries: any[]) => {
                 this.countries = countries;

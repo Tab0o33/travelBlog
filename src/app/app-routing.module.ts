@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
 import { HomeComponent } from './home/home.component';
 import { SummaryComponent } from './summary/summary.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { AddSummaryCardComponent } from './add-summary-card/add-summary-card.component';
 
+import { AuthGuard } from './services/auth-guard.service';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'summary', component: SummaryComponent },
-  { path: 'summary/new-card', component: AddSummaryCardComponent },
+  { path: 'summary/new-card', canActivate: [AuthGuard], component: AddSummaryCardComponent },
   { path: 'gallery', component: GalleryComponent },
   { path: '', component: HomeComponent }
 ];

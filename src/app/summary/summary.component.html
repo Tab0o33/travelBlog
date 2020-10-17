@@ -1,4 +1,4 @@
-<button routerLink="new-card" type="button" class="btn bg-primary blog-btn-add d-flex justify-content-center">
+<button *ngIf="isAuth" routerLink="new-card" type="button" class="btn bg-primary blog-btn-add d-flex justify-content-center">
     <span class="material-icons md-36">
         add_circle_outline
     </span>
@@ -13,7 +13,7 @@
             <div class="row">
 
                 <div *ngFor="let place of country.places" class="card p-2">
-                    <button type="button" class="btn bg-danger d-flex justify-content-center deleteIcon" data-toggle="modal" data-target="#deleteModal" (click)="selctPlaceAndOpenModal(place)">
+                    <button *ngIf="isAuth" type="button" class="btn bg-danger d-flex justify-content-center deleteIcon" data-toggle="modal" data-target="#deleteModal" (click)="selctPlaceAndOpenModal(place)">
                         <span class="material-icons">
                             delete
                         </span>
