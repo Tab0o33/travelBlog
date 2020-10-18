@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Subject, Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class SummaryService {
@@ -12,7 +13,10 @@ export class SummaryService {
     private countries = [];
     private summaryCards = [];
 
-    constructor(private http: HttpClient) { }
+    constructor(
+        private http: HttpClient,
+        private authService: AuthService
+    ) { }
 
     emitCountriesSubject() {
         this.countriesSubject.next(this.countries.slice());
@@ -52,18 +56,20 @@ export class SummaryService {
     }
 
     postNewSummaryCard(cardInfo: any, image: File) {
+        const token = this.authService.token;
         const cardDate = new FormData();
         cardDate.append('summaryCard', JSON.stringify(cardInfo));
         cardDate.append('image', image, cardInfo.title);
         return this.http.post('http://localhost:3000/api/summaryCard',
             cardDate,
-            { headers: { Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjgwYzA3OTgzZDI5ODY0MmM4NTBhYmQiLCJpYXQiOjE2MDI2Nzc4NDgsImV4cCI6MTYwMjc2NDI0OH0.zg_C_5x9X_g7RpRJsqpq4p0LS7eRU2VFwJsKzBs-IB0' } }
+            { headers: { Authorization: token } }
         );
     }
 
     deleteSummaryCard(cardId: string): Observable<any> {
+        const token = this.authService.token;
         const apiCall = this.http.delete(`http://localhost:3000/api/summaryCard/${cardId}`,
-            { headers: { Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjgwYzA3OTgzZDI5ODY0MmM4NTBhYmQiLCJpYXQiOjE2MDI2Nzc4NDgsImV4cCI6MTYwMjc2NDI0OH0.zg_C_5x9X_g7RpRJsqpq4p0LS7eRU2VFwJsKzBs-IB0' } }
+            { headers: { Authorization: token } }
         );
         apiCall.subscribe(
             () => {

@@ -51,7 +51,7 @@ export class AuthService {
         if (!this.token) {
             return true;
         }
-        const expiry = (JSON.parse(atob(this.token.split(' ')[1]))).exp;
+        const expiry = (JSON.parse(atob(this.token.split('.')[1]))).exp;
         return (Math.floor(new Date().getTime() / 1000)) >= expiry;
     }
 
