@@ -27,6 +27,7 @@ export class EditSummaryCardComponent implements OnInit {
         );
     }
 
+    // TODO : ne pas perde l'image lors de l'édition
     editCard(event: any) {
         const editSummaryCard$ = this.summaryService.editSummaryCard(this.id, event.values, event.imageFile);
         editSummaryCard$.subscribe(

@@ -21,23 +21,28 @@
                 <label for="firstDay">
                     Date de début
                 </label>
-                <input type="text" id="firstDay" name="firstDay" placeholder="Datepicker" class="form-control"
-                    [bsConfig]="bsConfig" bsDatepicker [ngModel]="data ? data.firstDay : ''" required>
+                <input type="text" id="firstDay" name="firstDay" placeholder="Datepicker" class="form-control" [bsConfig]="bsConfig" bsDatepicker [ngModel]="data ? data.firstDay : ''" required>
             </div>
 
             <div class="form-group">
                 <label for="lastDay">
                     Date de fin
                 </label>
-                <input type="text" id="lastDay" name="lastDay" placeholder="Datepicker" class="form-control"
-                    [bsConfig]="bsConfig" #dp="bsDatepicker" bsDatepicker [ngModel]="data ? data.lastDay : ''" required>
+                <input type="text" id="lastDay" name="lastDay" placeholder="Datepicker" class="form-control" [bsConfig]="bsConfig" #dp="bsDatepicker" bsDatepicker [ngModel]="data ? data.lastDay : ''" required>
             </div>
 
             <div class="form-group">
                 <label for="country">Pays</label>
-                <select class="form-control" id="country" name="country" [ngModel]="defaultCountry" [ngModel]="data ? data.country : countriesDDL[0]" required>
-                    <option *ngFor="let country of countriesDDL">{{country}}</option>
-                </select>
+                <div class="d-flex">
+                    <select class="form-control" id="country" name="country" [ngModel]="data ? data.country : selectedCountry" required>
+                        <option *ngFor="let country of countriesDDL">{{country}}</option>
+                    </select>
+                    <button type="button" class="btn bg-warning d-flex justify-content-center" data-toggle="modal" data-target="#addCountryModal">
+                        <span class="material-icons">
+                            add_circle_outline
+                        </span>
+                    </button>
+                </div>
             </div>
 
             <div class="form-group">
@@ -55,5 +60,28 @@
             <button class="btn btn-primary" type="submit" [disabled]="f.invalid">Enregistrer</button>
 
         </form>
+    </div>
+</div>
+
+
+<div class="modal fade show" id="addCountryModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Nouveau pays</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body form-group">
+                <label for="imageAlt">
+                    Entrez un nouveau nom de pays
+                </label>
+                <input type="text" id="imageAlt" class="form-control" name="imageAlt" [(ngModel)]="newCountry" required>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="addCountry(newCountry)">Confirmer</button>
+            </div>
+        </div>
     </div>
 </div>

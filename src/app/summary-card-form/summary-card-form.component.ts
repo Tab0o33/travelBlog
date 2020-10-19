@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { listLocales } from 'ngx-bootstrap/chronos';
+import { SummaryService } from '../services/summary.service';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-summary-card-form',
@@ -17,15 +19,31 @@ export class SummaryCardFormComponent implements OnInit {
     locale = 'fr';
     locales = listLocales();
 
-    countriesDDL = ['1 - Colombie', '2 - Equateur', '3 - Pérou']; // TODO : pays en base
-    defaultCountry = this.countriesDDL[0];
+    countriesDDL: string[]; // TODO : pays en base
+    selectedCountry: string;
 
     imageFile: File;
 
-    constructor(private localeService: BsLocaleService) { }
+    newCountry = '';
+
+    constructor(
+        private localeService: BsLocaleService,
+        private summaryService: SummaryService
+    ) { }
 
     ngOnInit(): void {
         this.localeService.use(this.locale);
+        this.summaryService.getCountries$().subscribe(
+            (countries: { label: string, position: number }[]) => {
+                countries.sort((a, b) => a.position - b.position);
+                this.countriesDDL = countries.map(c => c.label);
+                this.selectedCountry = this.countriesDDL[0];
+            },
+            (err) => {
+                console.log(err);
+                this.newCountry = '';
+            },
+        );
     }
 
     onSubmit(form: NgForm) {
@@ -34,6 +52,23 @@ export class SummaryCardFormComponent implements OnInit {
 
     detectFiles(event) {
         this.imageFile = event.target.files[0];
+    }
+
+    addCountry(newCountry: string) {
+        console.log(newCountry);
+        const position = this.countriesDDL.length + 1;
+        const label = `${position} - ${newCountry}`;
+        const newCountryObj = { label, position };
+        this.summaryService.addCountry$(newCountryObj).subscribe(
+            () => {
+                this.countriesDDL.push(label);
+                this.newCountry = '';
+            },
+            (err) => {
+                console.log(err);
+                this.newCountry = '';
+            },
+        );
     }
 
 }
