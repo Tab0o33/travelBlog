@@ -1,5 +1,6 @@
 import { OnDestroy } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { SummaryService } from '../services/summary.service';
@@ -21,7 +22,8 @@ export class SummaryComponent implements OnInit, OnDestroy {
 
     constructor(
         private summaryService: SummaryService,
-        private authService: AuthService
+        private authService: AuthService,
+        private router: Router
     ) { }
 
 
@@ -38,6 +40,12 @@ export class SummaryComponent implements OnInit, OnDestroy {
     selctPlaceAndOpenModal(card: any) {
         this.selectedCard = card;
         this.isModalOpen = true;
+    }
+
+    editCard(card: any) {
+        console.log(card);
+        this.selectedCard = card;
+        this.router.navigate([`summary/edit-card/${card._id}`]);
     }
 
     deleteCard(card: any) {

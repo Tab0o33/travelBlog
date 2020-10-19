@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Subject, Observable, throwError } from 'rxjs';
+import { Subject, Observable, throwError, of } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
@@ -20,6 +20,10 @@ export class SummaryService {
 
     emitCountriesSubject() {
         this.countriesSubject.next(this.countries.slice());
+    }
+
+    getOneCard$(id: string) {
+        return this.http.get<any>(`http://localhost:3000/api/summaryCard/${id}`);
     }
 
     getSummaryCards() {
@@ -61,6 +65,17 @@ export class SummaryService {
         cardDate.append('summaryCard', JSON.stringify(cardInfo));
         cardDate.append('image', image, cardInfo.title);
         return this.http.post('http://localhost:3000/api/summaryCard',
+            cardDate,
+            { headers: { Authorization: token } }
+        );
+    }
+
+    editSummaryCard(cardId: string, cardInfo: any, image: File) {
+        const token = this.authService.token;
+        const cardDate = new FormData();
+        cardDate.append('summaryCard', JSON.stringify(cardInfo));
+        cardDate.append('image', image, cardInfo.title);
+        return this.http.put(`http://localhost:3000/api/summaryCard/${cardId}`,
             cardDate,
             { headers: { Authorization: token } }
         );

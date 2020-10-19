@@ -20,6 +20,8 @@ import { HomeComponent } from './home/home.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { AddSummaryCardComponent } from './add-summary-card/add-summary-card.component';
 import { AuthComponent } from './auth/auth.component';
+import { EditSummaryCardComponent } from './edit-summary-card/edit-summary-card.component';
+import { SummaryCardFormComponent } from './summary-card-form/summary-card-form.component';
 
 // Services
 import { SummaryService } from './services/summary.service';
@@ -35,7 +37,9 @@ import { AuthGuard } from './services/auth-guard.service';
     HomeComponent,
     GalleryComponent,
     AddSummaryCardComponent,
-    AuthComponent
+    AuthComponent,
+    EditSummaryCardComponent,
+    SummaryCardFormComponent
   ],
   imports: [
     BrowserModule,

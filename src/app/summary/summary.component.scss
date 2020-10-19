@@ -14,14 +14,21 @@
     }
 }
 
-.deleteIcon {
-    width: 50px;
+.summaryIcon {
     position: absolute ;
-    left: 90%;
-    top: -7%;
     width: 40px;
     height: 40px;
     border-radius: 20px;
+    top: -7%;
+
+    &-edit{
+        left: 70%;
+    }
+
+    &-delete{
+        left: 90%;
+    }
+
 }
 
 .blog-btn-add {

@@ -13,7 +13,12 @@
             <div class="row">
 
                 <div *ngFor="let place of country.places" class="card p-2">
-                    <button *ngIf="isAuth" type="button" class="btn bg-danger d-flex justify-content-center deleteIcon" data-toggle="modal" data-target="#deleteModal" (click)="selctPlaceAndOpenModal(place)">
+                    <button *ngIf="isAuth" type="button" class="btn bg-warning d-flex justify-content-center summaryIcon summaryIcon-edit" (click)="editCard(place)">
+                        <span class="material-icons">
+                            edit
+                        </span>
+                    </button>
+                    <button *ngIf="isAuth" type="button" class="btn bg-danger d-flex justify-content-center summaryIcon summaryIcon-delete" data-toggle="modal" data-target="#deleteModal" (click)="selctPlaceAndOpenModal(place)">
                         <span class="material-icons">
                             delete
                         </span>
