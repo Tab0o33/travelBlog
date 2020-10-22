@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NotificationService } from '../services/notification.service';
 import { SummaryService } from '../services/summary.service';
 
 @Component({
@@ -11,7 +12,8 @@ export class AddSummaryCardComponent implements OnInit {
 
     constructor(
         private summaryService: SummaryService,
-        private router: Router
+        private router: Router,
+        private notificationService: NotificationService
     ) { }
 
     ngOnInit(): void {
@@ -25,9 +27,10 @@ export class AddSummaryCardComponent implements OnInit {
         postNewSummaryCard$.subscribe(
             () => {
                 this.router.navigate(['/summary']);
+                this.notificationService.popToastSuccess();
             },
             (error) => {
-                console.log(error);
+                this.notificationService.popToastError();
             }
         );
     }

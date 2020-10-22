@@ -4,11 +4,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+// Modules ngx-bootstrap
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { frLocale } from 'ngx-bootstrap/locale';
 defineLocale('fr', frLocale);
+
+// Modules autres
+import {ToasterModule} from 'angular2-toaster';
 
 // Components
 import { AppRoutingModule } from './app-routing.module';
@@ -27,6 +31,7 @@ import { SummaryCardFormComponent } from './summary-card-form/summary-card-form.
 import { SummaryService } from './services/summary.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
+import { NotificationService } from './services/notification.service';
 
 @NgModule({
   declarations: [
@@ -50,11 +55,13 @@ import { AuthGuard } from './services/auth-guard.service';
     BrowserAnimationsModule,
     AlertModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    ToasterModule.forRoot()
   ],
   providers: [
     SummaryService,
     AuthService,
-    AuthGuard
+    AuthGuard,
+    NotificationService
   ],
   bootstrap: [AppComponent]
 })

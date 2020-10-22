@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { listLocales } from 'ngx-bootstrap/chronos';
 import { SummaryService } from '../services/summary.service';
-import { Observable } from 'rxjs';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
     selector: 'app-summary-card-form',
@@ -14,6 +14,7 @@ export class SummaryCardFormComponent implements OnInit {
 
     @Input() data: any;
     @Output() submitForm = new EventEmitter<any>();
+    @Output() getCountriesFailed = new EventEmitter<any>();
 
     bsConfig: Partial<BsDatepickerConfig> = Object.assign({}, { containerClass: 'theme-default' });
     locale = 'fr';
@@ -28,7 +29,8 @@ export class SummaryCardFormComponent implements OnInit {
 
     constructor(
         private localeService: BsLocaleService,
-        private summaryService: SummaryService
+        private summaryService: SummaryService,
+        private notificationService: NotificationService
     ) { }
 
     ngOnInit(): void {
@@ -40,7 +42,7 @@ export class SummaryCardFormComponent implements OnInit {
                 this.selectedCountry = this.countriesDDL[0];
             },
             (err) => {
-                console.log(err);
+                this.getCountriesFailed.emit();
                 this.newCountry = '';
             },
         );
@@ -62,10 +64,11 @@ export class SummaryCardFormComponent implements OnInit {
         this.summaryService.addCountry$(newCountryObj).subscribe(
             () => {
                 this.countriesDDL.push(label);
+                this.notificationService.popToastSuccess();
                 this.newCountry = '';
             },
             (err) => {
-                console.log(err);
+                this.notificationService.popToastError();
                 this.newCountry = '';
             },
         );

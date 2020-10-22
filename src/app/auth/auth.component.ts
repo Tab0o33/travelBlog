@@ -3,47 +3,50 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss']
+    selector: 'app-auth',
+    templateUrl: './auth.component.html',
+    styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
 
-  isAuth: boolean;
+    isAuth: boolean;
+    signinForm: FormGroup;
+    badAuthent = false;
 
-  signinForm: FormGroup;
+    constructor(
+        private authService: AuthService,
+        private formBuilder: FormBuilder
+    ) { }
 
-  constructor(
-    private authService: AuthService,
-    private formBuilder: FormBuilder
-  ) { }
+    ngOnInit() {
+        this.isAuth = this.authService.isLoggedIn();
+        this.initForm();
+    }
 
-  ngOnInit() {
-    this.isAuth = this.authService.isLoggedIn();
-    this.initForm();
-  }
+    initForm() {
+        this.signinForm = this.formBuilder.group({
+            email: ['', [Validators.required, Validators.email]],
+            password: ['', [Validators.required]]
+        });
+    }
 
-  initForm() {
-    this.signinForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
-    });
-  }
+    onSubmit() {
+        const email = this.signinForm.get('email').value;
+        const password = this.signinForm.get('password').value;
 
-  onSubmit() {
-    const email = this.signinForm.get('email').value;
-    const password = this.signinForm.get('password').value;
+        this.authService.login(email, password).subscribe(
+            () => {
+                this.isAuth = true;
+                this.badAuthent = false;
+            },
+            (error) => {
+                this.badAuthent = true;
+            }
+        );
+    }
 
-    this.authService.login(email, password).then(
-      () => {
-        this.isAuth = true;
-      },
-      (error) => {}
-    );
-  }
-
-  logout(){
-      this.authService.logout();
-  }
+    logout() {
+        this.authService.logout();
+    }
 
 }

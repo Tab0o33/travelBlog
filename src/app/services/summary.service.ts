@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Subject, Observable, throwError, of } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { AuthService } from './auth.service';
+import { NotificationService } from './notification.service';
 
 @Injectable()
 export class SummaryService {
@@ -15,7 +16,8 @@ export class SummaryService {
 
     constructor(
         private http: HttpClient,
-        private authService: AuthService
+        private authService: AuthService,
+        private notificationService: NotificationService
     ) { }
 
     emitCountriesSubject() {
@@ -37,6 +39,7 @@ export class SummaryService {
                 },
                 (error) => {
                     console.log('Erreur ! : ', error);
+                    this.notificationService.popToastError();
                 }
             );
     }
@@ -91,10 +94,7 @@ export class SummaryService {
                 this.summaryCards = this.summaryCards.filter(card => card._id !== cardId);
                 this.countries = this.mapAndOrderData(this.summaryCards);
                 this.emitCountriesSubject();
-            },
-            (err) => {
-                console.log(err);
-            },
+            }
         );
         return apiCall;
     }

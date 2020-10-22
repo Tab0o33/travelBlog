@@ -1,1 +1,9 @@
-<app-summary-card-form [data]="cardToEdit" (submitForm)="editCard($event)"></app-summary-card-form>
+<app-summary-card-form *ngIf="APICallFailed == 'noFail'" [data]="cardToEdit" (submitForm)="editCard($event)" (getCountriesFailed)="APICallFailed = 'countries'"></app-summary-card-form>
+
+<div *ngIf="APICallFailed == 'oneCard'" class="alert alert-info" role="alert">
+    Echec de la réccupérartion de la carte à modifier. Veuillez réessayer plus tard
+</div>
+
+<div *ngIf="APICallFailed == 'countries'" class="alert alert-info" role="alert">
+    Echec de la réccupérartion de la liste de pays. Veuillez réessayer plus tard
+</div>

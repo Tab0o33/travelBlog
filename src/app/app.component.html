@@ -1,6 +1,8 @@
 <div #body (window:resize)="resize()">
 
-  <app-sidebar [sideBarOpen]="sideBarOpen" (toggleSideBar)="toggleSideBar()"></app-sidebar>
-  <app-container [containerleft]="containerleft"></app-container>
-  
+    <toaster-container [toasterconfig]="notificationService.config"></toaster-container>
+
+    <app-sidebar [sideBarOpen]="sideBarOpen" (toggleSideBar)="toggleSideBar()"></app-sidebar>
+    <app-container [containerleft]="containerleft"></app-container>
+
 </div>

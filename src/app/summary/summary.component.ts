@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
+import { NotificationService } from '../services/notification.service';
 import { SummaryService } from '../services/summary.service';
 
 @Component({
@@ -23,7 +24,8 @@ export class SummaryComponent implements OnInit, OnDestroy {
     constructor(
         private summaryService: SummaryService,
         private authService: AuthService,
-        private router: Router
+        private router: Router,
+        private notificationService: NotificationService
     ) { }
 
 
@@ -49,7 +51,15 @@ export class SummaryComponent implements OnInit, OnDestroy {
     }
 
     deleteCard(card: any) {
-        this.summaryService.deleteSummaryCard(card._id);
+        this.summaryService.deleteSummaryCard(card._id).subscribe(
+            () => {
+                this.router.navigate(['/summary']);
+                this.notificationService.popToastSuccess();
+            },
+            () => {
+                this.notificationService.popToastError();
+            }
+        );
     }
 
     ngOnDestroy() {

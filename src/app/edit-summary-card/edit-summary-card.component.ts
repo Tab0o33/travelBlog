@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NotificationService } from '../services/notification.service';
 import { SummaryService } from '../services/summary.service';
 
 @Component({
@@ -11,11 +12,13 @@ export class EditSummaryCardComponent implements OnInit {
 
     id: string;
     cardToEdit: any;
+    APICallFailed: string;
 
     constructor(
         private summaryService: SummaryService,
         private route: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private notificationService: NotificationService
     ) { }
 
     ngOnInit(): void {
@@ -23,7 +26,11 @@ export class EditSummaryCardComponent implements OnInit {
         this.summaryService.getOneCard$(this.id).subscribe(
             (card: any) => {
                 this.cardToEdit = card;
-            }
+                this.APICallFailed = 'noFail';
+            },
+            (err) => {
+                this.APICallFailed = 'oneCard';
+            },
         );
     }
 
@@ -33,9 +40,10 @@ export class EditSummaryCardComponent implements OnInit {
         editSummaryCard$.subscribe(
             () => {
                 this.router.navigate(['/summary']);
+                this.notificationService.popToastSuccess();
             },
-            (error) => {
-                console.log(error);
+            () => {
+                this.notificationService.popToastError();
             }
         );
     }
