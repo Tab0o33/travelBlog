@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { listLocales } from 'ngx-bootstrap/chronos';
-import { SummaryService } from '../services/summary.service';
-import { NotificationService } from '../services/notification.service';
+import { SummaryService } from '../summary.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
     selector: 'app-summary-card-form',

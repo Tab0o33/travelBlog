@@ -2,9 +2,9 @@ import { OnDestroy } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AuthService } from '../services/auth.service';
-import { NotificationService } from '../services/notification.service';
-import { SummaryService } from '../services/summary.service';
+import { AuthService } from '../../home/auth.service';
+import { NotificationService } from '../../services/notification.service';
+import { SummaryService } from '../summary.service';
 
 @Component({
     selector: 'app-summary',

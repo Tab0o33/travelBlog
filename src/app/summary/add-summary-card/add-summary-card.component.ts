@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { NotificationService } from '../services/notification.service';
-import { SummaryService } from '../services/summary.service';
+import { NotificationService } from '../../services/notification.service';
+import { SummaryService } from '../summary.service';
 
 @Component({
     selector: 'app-add-summary-card',
