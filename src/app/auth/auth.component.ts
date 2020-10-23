@@ -18,19 +18,19 @@ export class AuthComponent implements OnInit {
         private formBuilder: FormBuilder
     ) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.isAuth = this.authService.isLoggedIn();
         this.initForm();
     }
 
-    initForm() {
+    initForm(): void {
         this.signinForm = this.formBuilder.group({
             email: ['', [Validators.required, Validators.email]],
             password: ['', [Validators.required]]
         });
     }
 
-    onSubmit() {
+    onSubmit(): void {
         const email = this.signinForm.get('email').value;
         const password = this.signinForm.get('password').value;
 
@@ -45,7 +45,7 @@ export class AuthComponent implements OnInit {
         );
     }
 
-    logout() {
+    logout(): void {
         this.authService.logout();
     }
 

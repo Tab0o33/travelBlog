@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotificationService } from '../services/notification.service';
 import { SummaryService } from '../services/summary.service';
@@ -8,7 +8,7 @@ import { SummaryService } from '../services/summary.service';
     templateUrl: './add-summary-card.component.html',
     styleUrls: ['./add-summary-card.component.scss']
 })
-export class AddSummaryCardComponent implements OnInit {
+export class AddSummaryCardComponent {
 
     constructor(
         private summaryService: SummaryService,
@@ -16,10 +16,7 @@ export class AddSummaryCardComponent implements OnInit {
         private notificationService: NotificationService
     ) { }
 
-    ngOnInit(): void {
-    }
-
-    addNewCard(event: any) {
+    addNewCard(event: any): void {
         event.values.firstDay = this.mapDateInString(event.values.firstDay);
         event.values.lastDay = this.mapDateInString(event.values.lastDay);
 
@@ -29,13 +26,13 @@ export class AddSummaryCardComponent implements OnInit {
                 this.router.navigate(['/summary']);
                 this.notificationService.popToastSuccess();
             },
-            (error) => {
+            () => {
                 this.notificationService.popToastError();
             }
         );
     }
 
-    private mapDateInString(travelDate: Date) {
+    private mapDateInString(travelDate: Date): string {
         const dd = String(travelDate.getDate()).padStart(2, '0');
         const mm = String(travelDate.getMonth() + 1).padStart(2, '0');
         const yyyy = travelDate.getFullYear();

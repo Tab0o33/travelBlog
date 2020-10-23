@@ -11,11 +11,11 @@ export class NotificationService {
 
     constructor(private toasterService: ToasterService) { }
 
-    popToastSuccess() {
+    popToastSuccess(): void {
         this.toasterService.pop('success', 'Success', 'Modification réussie');
     }
 
-    popToastError() {
+    popToastError(): void {
         this.toasterService.pop('error', 'Error', 'Une erreur est survenue');
     }
 }

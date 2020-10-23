@@ -28,14 +28,14 @@ export class EditSummaryCardComponent implements OnInit {
                 this.cardToEdit = card;
                 this.APICallFailed = 'noFail';
             },
-            (err) => {
+            () => {
                 this.APICallFailed = 'oneCard';
             },
         );
     }
 
     // TODO : ne pas perde l'image lors de l'édition
-    editCard(event: any) {
+    editCard(event: any): void {
         const editSummaryCard$ = this.summaryService.editSummaryCard(this.id, event.values, event.imageFile);
         editSummaryCard$.subscribe(
             () => {

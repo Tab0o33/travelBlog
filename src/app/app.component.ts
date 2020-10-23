@@ -18,7 +18,7 @@ export class AppComponent implements AfterViewInit {
 
     constructor(public notificationService: NotificationService) { }
 
-    ngAfterViewInit() {
+    ngAfterViewInit(): void {
         setTimeout(() => {
             this.bodyWidth = this.body.nativeElement.offsetWidth;
             if (this.bodyWidth > 991) {
@@ -31,18 +31,18 @@ export class AppComponent implements AfterViewInit {
         }, 10);
     }
 
-    toggleSideBar() {
+    toggleSideBar(): void {
         this.bodyWidth = this.body.nativeElement.offsetWidth;
         this.toggle = !this.toggle;
         this.handleStateMachine();
     }
 
-    resize() {
+    resize(): void {
         this.bodyWidth = this.body.nativeElement.offsetWidth;
         this.handleStateMachine();
     }
 
-    private handleStateMachine() {
+    private handleStateMachine(): void {
         if (this.bodyWidth > 991 && this.toggle) {
             this.sideBarOpen = false;
             this.containerleft = true;

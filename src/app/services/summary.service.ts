@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Subject, Observable, throwError, of } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { Subject, Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { NotificationService } from './notification.service';
 
@@ -20,15 +19,15 @@ export class SummaryService {
         private notificationService: NotificationService
     ) { }
 
-    emitCountriesSubject() {
+    emitCountriesSubject(): void {
         this.countriesSubject.next(this.countries.slice());
     }
 
-    getOneCard$(id: string) {
+    getOneCard$(id: string): Observable<any> {
         return this.http.get<any>(`http://localhost:3000/api/summaryCard/${id}`);
     }
 
-    getSummaryCards() {
+    getSummaryCards(): void {
         this.http
             .get<any[]>('http://localhost:3000/api/summaryCard')
             .subscribe(
@@ -37,8 +36,7 @@ export class SummaryService {
                     this.countries = this.mapAndOrderData(this.summaryCards);
                     this.emitCountriesSubject();
                 },
-                (error) => {
-                    console.log('Erreur ! : ', error);
+                () => {
                     this.notificationService.popToastError();
                 }
             );
@@ -62,7 +60,7 @@ export class SummaryService {
         return countries;
     }
 
-    postNewSummaryCard(cardInfo: any, image: File) {
+    postNewSummaryCard(cardInfo: any, image: File): Observable<any> {
         const token = this.authService.token;
         const cardDate = new FormData();
         cardDate.append('summaryCard', JSON.stringify(cardInfo));
@@ -73,7 +71,7 @@ export class SummaryService {
         );
     }
 
-    editSummaryCard(cardId: string, cardInfo: any, image: File) {
+    editSummaryCard(cardId: string, cardInfo: any, image: File): Observable<any> {
         const token = this.authService.token;
         const cardDate = new FormData();
         cardDate.append('summaryCard', JSON.stringify(cardInfo));

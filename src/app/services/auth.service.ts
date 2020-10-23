@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -27,17 +27,17 @@ export class AuthService {
         return callAPI;
     }
 
-    private setSession(authResult) {
+    private setSession(authResult): void {
         localStorage.setItem('id_token', `Bearer ${authResult.token}`);
     }
 
-    private hasToken() {
+    private hasToken(): boolean {
         const storedToken = localStorage.getItem('id_token');
         this.token = storedToken;
         return !!storedToken;
     }
 
-    private tokenExpired() {
+    private tokenExpired(): boolean {
         if (!this.token) {
             return true;
         }
@@ -45,11 +45,11 @@ export class AuthService {
         return (Math.floor(new Date().getTime() / 1000)) >= expiry;
     }
 
-    public isLoggedIn() {
+    public isLoggedIn(): boolean {
         return this.hasToken() && !this.tokenExpired();
     }
 
-    logout() {
+    logout(): void {
         localStorage.removeItem('id_token');
         location.reload();
     }

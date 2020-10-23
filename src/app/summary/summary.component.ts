@@ -17,7 +17,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
     countriesSubscription: Subscription;
 
     isAuth: boolean;
-    
+
     isModalOpen = false;
     selectedCard: any;
 
@@ -39,18 +39,17 @@ export class SummaryComponent implements OnInit, OnDestroy {
         this.summaryService.getSummaryCards();
     }
 
-    selctPlaceAndOpenModal(card: any) {
+    selctPlaceAndOpenModal(card: any): void {
         this.selectedCard = card;
         this.isModalOpen = true;
     }
 
-    editCard(card: any) {
-        console.log(card);
+    editCard(card: any): void {
         this.selectedCard = card;
         this.router.navigate([`summary/edit-card/${card._id}`]);
     }
 
-    deleteCard(card: any) {
+    deleteCard(card: any): void {
         this.summaryService.deleteSummaryCard(card._id).subscribe(
             () => {
                 this.router.navigate(['/summary']);
@@ -62,7 +61,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
         );
     }
 
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this.countriesSubscription.unsubscribe();
     }
 

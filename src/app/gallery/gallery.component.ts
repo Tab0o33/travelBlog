@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-gallery',
     templateUrl: './gallery.component.html',
     styleUrls: ['./gallery.component.scss']
 })
-export class GalleryComponent implements OnInit {
+export class GalleryComponent {
 
     items = [
         { type: 'picture', name: 'bogota.jpg', alt: 'Bogotá' },
@@ -23,9 +23,7 @@ export class GalleryComponent implements OnInit {
 
     constructor() { }
 
-    ngOnInit(): void { }
-
-    displayItem(item: any) {
+    displayItem(item: any): void {
         this.selectedItem = item;
         this.isModalOpen = true;
     }

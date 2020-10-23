@@ -20,7 +20,7 @@ export class SummaryCardFormComponent implements OnInit {
     locale = 'fr';
     locales = listLocales();
 
-    countriesDDL: string[]; // TODO : pays en base
+    countriesDDL: string[];
     selectedCountry: string;
 
     imageFile: File;
@@ -41,7 +41,7 @@ export class SummaryCardFormComponent implements OnInit {
                 this.countriesDDL = countries.map(c => c.label);
                 this.selectedCountry = this.countriesDDL[0];
             },
-            (err) => {
+            () => {
                 this.getCountriesFailed.emit();
                 this.newCountry = '';
             },
@@ -57,7 +57,6 @@ export class SummaryCardFormComponent implements OnInit {
     }
 
     addCountry(newCountry: string) {
-        console.log(newCountry);
         const position = this.countriesDDL.length + 1;
         const label = `${position} - ${newCountry}`;
         const newCountryObj = { label, position };
@@ -67,7 +66,7 @@ export class SummaryCardFormComponent implements OnInit {
                 this.notificationService.popToastSuccess();
                 this.newCountry = '';
             },
-            (err) => {
+            () => {
                 this.notificationService.popToastError();
                 this.newCountry = '';
             },
