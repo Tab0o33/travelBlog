@@ -61,6 +61,10 @@ export class SummaryComponent implements OnInit, OnDestroy {
         );
     }
 
+    addCard(): void {
+        this.router.navigate([`summary/new-card`]);
+    }
+
     ngOnDestroy(): void {
         this.countriesSubscription.unsubscribe();
     }
