@@ -21,6 +21,7 @@ import { NotificationService } from './services/notification.service';
 // Modules internes
 import { AppRoutingModule } from './app-routing.module';
 import { ComponentModule } from './component.module';
+import { Properties } from './services/properties.service';
 
 @NgModule({
     declarations: [
@@ -40,7 +41,8 @@ import { ComponentModule } from './component.module';
     ],
     providers: [
         AuthGuard,
-        NotificationService
+        NotificationService,
+        Properties
     ],
     bootstrap: [AppComponent]
 })

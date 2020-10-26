@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Properties } from '../services/properties.service';
 
 @Injectable({
     providedIn: 'root'
@@ -12,10 +13,13 @@ export class AuthService {
     token: string;
     userId: string;
 
-    constructor(private http: HttpClient) { }
+    constructor(
+        private http: HttpClient,
+        private properties: Properties
+    ) { }
 
     login(email: string, password: string): Observable<any> {
-        const callAPI = this.http.post('http://localhost:3000/api/auth/login', { email, password });
+        const callAPI = this.http.post(`http://${this.properties.hostAPI}/api/auth/login`, { email, password });
         callAPI.subscribe(
             (authData: { token: string, userId: string }) => {
                 this.token = authData.token;

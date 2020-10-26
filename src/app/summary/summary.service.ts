@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Subject, Observable } from 'rxjs';
 import { AuthService } from '../home/auth.service';
 import { NotificationService } from '../services/notification.service';
+import { Properties } from '../services/properties.service';
 
 @Injectable()
 export class SummaryService {
@@ -16,7 +17,8 @@ export class SummaryService {
     constructor(
         private http: HttpClient,
         private authService: AuthService,
-        private notificationService: NotificationService
+        private notificationService: NotificationService,
+        private properties: Properties
     ) { }
 
     emitCountriesSubject(): void {
@@ -24,12 +26,12 @@ export class SummaryService {
     }
 
     getOneCard$(id: string): Observable<any> {
-        return this.http.get<any>(`http://localhost:3000/api/summaryCard/${id}`);
+        return this.http.get<any>(`http://${this.properties.hostAPI}/api/summaryCard/${id}`);
     }
 
     getSummaryCards(): void {
         this.http
-            .get<any[]>('http://localhost:3000/api/summaryCard')
+            .get<any[]>(`http://${this.properties.hostAPI}/api/summaryCard`)
             .subscribe(
                 (response) => {
                     this.summaryCards = response;
@@ -65,7 +67,7 @@ export class SummaryService {
         const cardDate = new FormData();
         cardDate.append('summaryCard', JSON.stringify(cardInfo));
         cardDate.append('image', image, cardInfo.title);
-        return this.http.post('http://localhost:3000/api/summaryCard',
+        return this.http.post(`http://${this.properties.hostAPI}/api/summaryCard`,
             cardDate,
             { headers: { Authorization: token } }
         );
@@ -76,7 +78,7 @@ export class SummaryService {
         const cardDate = new FormData();
         cardDate.append('summaryCard', JSON.stringify(cardInfo));
         cardDate.append('image', image, cardInfo.title);
-        return this.http.put(`http://localhost:3000/api/summaryCard/${cardId}`,
+        return this.http.put(`http://${this.properties.hostAPI}/api/summaryCard/${cardId}`,
             cardDate,
             { headers: { Authorization: token } }
         );
@@ -84,7 +86,7 @@ export class SummaryService {
 
     deleteSummaryCard(cardId: string): Observable<any> {
         const token = this.authService.token;
-        const apiCall = this.http.delete(`http://localhost:3000/api/summaryCard/${cardId}`,
+        const apiCall = this.http.delete(`http://${this.properties.hostAPI}/api/summaryCard/${cardId}`,
             { headers: { Authorization: token } }
         );
         apiCall.subscribe(
@@ -99,14 +101,14 @@ export class SummaryService {
 
     getCountries$(): Observable<{ label: string, position: number }[]> {
         const token = this.authService.token;
-        return this.http.get<{ label: string, position: number }[]>(`http://localhost:3000/api/summaryCountry`,
+        return this.http.get<{ label: string, position: number }[]>(`http://${this.properties.hostAPI}/api/summaryCountry`,
             { headers: { Authorization: token } }
         );
     }
 
     addCountry$(newCountry: { label: string, position: number }): Observable<any> {
         const token = this.authService.token;
-        return this.http.post(`http://localhost:3000/api/summaryCountry`,
+        return this.http.post(`http://${this.properties.hostAPI}/api/summaryCountry`,
             newCountry,
             { headers: { Authorization: token } }
         );
