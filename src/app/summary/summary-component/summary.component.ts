@@ -39,14 +39,9 @@ export class SummaryComponent implements OnInit, OnDestroy {
         this.summaryService.getSummaryCards();
     }
 
-    selctPlaceAndOpenModal(card: any): void {
+    showDeleteModal(card: any): void {
         this.selectedCard = card;
         this.isModalOpen = true;
-    }
-
-    editCard(card: any): void {
-        this.selectedCard = card;
-        this.router.navigate([`summary/edit-card/${card._id}`]);
     }
 
     deleteCard(card: any): void {

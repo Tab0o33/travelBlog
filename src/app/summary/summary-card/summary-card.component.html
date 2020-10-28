@@ -1,0 +1,21 @@
+<div class="card p-2">
+    <button *ngIf="isAuth" type="button"
+        class="btn bg-warning d-flex justify-content-center summaryIcon summaryIcon-edit" (click)="editCard()">
+        <span class="material-icons">
+            edit
+        </span>
+    </button>
+    <button *ngIf="isAuth" type="button" data-toggle="modal" data-target="#deleteModal"
+        class="btn bg-danger d-flex justify-content-center summaryIcon summaryIcon-delete" (click)="showDeleteModal()">
+        <span class="material-icons">
+            delete
+        </span>
+    </button>
+    <img class="card-img" [src]="place.imageUrl" [alt]="place.imageAlt">
+    <h4><b>{{place.title}}</b></h4>
+    <p class="font-weight-bold">{{place.description}}</p>
+    <p class="font-weight-bold text-secondary font-italic">{{place.firstDay}} - {{place.lastDay}}</p>
+    <div>
+        <button type="button" class="btn btn-outline-secondary">Détails »</button>
+    </div>
+</div>

@@ -17,6 +17,7 @@ import { AddSummaryCardComponent } from './add-summary-card/add-summary-card.com
 
 // Services
 import { SummaryService } from './summary.service';
+import { SummaryCardComponent } from './summary-card/summary-card.component';
 
 @NgModule({
     imports: [
@@ -28,7 +29,8 @@ import { SummaryService } from './summary.service';
         SummaryComponent,
         SummaryCardFormComponent,
         AddSummaryCardComponent,
-        EditSummaryCardComponent
+        EditSummaryCardComponent,
+        SummaryCardComponent
 
     ],
     exports: [
