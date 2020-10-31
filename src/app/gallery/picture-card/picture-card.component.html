@@ -1,0 +1,12 @@
+<div class="picture-block img-thumbnail shadow-sm" data-toggle="modal" data-target="#GalleryModal"
+    (click)="displayItem()">
+    <img *ngIf="item.type == 'picture'" [src]="'/assets/'+ item.name" [alt]="item.alt">
+    <div *ngIf="item.type == 'video'" class="containerAll">
+        <img class="box" [src]="'/assets/'+ item.image" [alt]="item.alt">
+        <div class="video-play box stack-top d-flex justify-content-center align-items-center">
+            <span class="material-icons md-48">
+                play_circle_filled
+            </span>
+        </div>
+    </div>
+</div>

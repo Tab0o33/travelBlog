@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 
 // Components
 import { GalleryComponent } from './gallery-component/gallery.component';
+import { PictureCardComponent } from './picture-card/picture-card.component';
 
 // Services
 
@@ -16,7 +17,8 @@ import { GalleryComponent } from './gallery-component/gallery.component';
         FormsModule
     ],
     declarations: [
-        GalleryComponent
+        GalleryComponent,
+        PictureCardComponent
     ],
     exports: [
         GalleryComponent
