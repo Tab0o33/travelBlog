@@ -91,7 +91,7 @@ export class SummaryService {
         );
         apiCall.subscribe(
             () => {
-                this.summaryCards = this.summaryCards.filter(card => card._id !== cardId);
+                this.summaryCards = this.summaryCards.filter(card => card.id !== cardId);
                 this.countries = this.mapAndOrderData(this.summaryCards);
                 this.emitCountriesSubject();
             }

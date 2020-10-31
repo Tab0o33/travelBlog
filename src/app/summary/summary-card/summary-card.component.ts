@@ -20,7 +20,7 @@ export class SummaryCardComponent implements OnInit {
     }
 
     editCard(): void {
-        this.router.navigate([`summary/edit-card/${this.place._id}`]);
+        this.router.navigate([`summary/edit-card/${this.place.id}`]);
     }
 
     showDeleteModal(): void {

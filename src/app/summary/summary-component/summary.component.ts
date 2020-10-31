@@ -45,7 +45,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
     }
 
     deleteCard(card: any): void {
-        this.summaryService.deleteSummaryCard(card._id).subscribe(
+        this.summaryService.deleteSummaryCard(card.id).subscribe(
             () => {
                 this.router.navigate(['/summary']);
                 this.notificationService.popToastSuccess();
