@@ -15,13 +15,16 @@ export class AppComponent implements AfterViewInit {
     sideBarOpen = false;
     containerleft = true;
     toggle = false;
+    isPhoneScreen = false;
 
     constructor(public notificationService: NotificationService) { }
 
     ngAfterViewInit(): void {
         setTimeout(() => {
             this.bodyWidth = this.body.nativeElement.offsetWidth;
-            if (this.bodyWidth > 991) {
+            if (this.bodyWidth < 576) {
+                this.isPhoneScreen = true;
+            } else if (this.bodyWidth > 991) {
                 this.sideBarOpen = true;
                 this.containerleft = false;
             } else {
@@ -43,18 +46,26 @@ export class AppComponent implements AfterViewInit {
     }
 
     private handleStateMachine(): void {
-        if (this.bodyWidth > 991 && this.toggle) {
+        if (this.bodyWidth < 576) {
             this.sideBarOpen = false;
             this.containerleft = true;
+            this.isPhoneScreen = true;
+        } else if (this.bodyWidth > 991 && this.toggle) {
+            this.sideBarOpen = false;
+            this.containerleft = true;
+            this.isPhoneScreen = false;
         } else if (this.bodyWidth > 991 && !this.toggle) {
             this.sideBarOpen = true;
             this.containerleft = false;
+            this.isPhoneScreen = false;
         } else if (this.bodyWidth <= 991 && this.toggle) {
             this.sideBarOpen = true;
             this.containerleft = true;
+            this.isPhoneScreen = false;
         } else {
             this.sideBarOpen = false;
             this.containerleft = true;
+            this.isPhoneScreen = false;
         }
     }
 }

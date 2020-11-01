@@ -1,17 +1,28 @@
 @import "../../styles.scss";
 
 .blog-sidebar{
-  margin-left: 0;     
-  position: fixed;
-  z-index: map-get($z-index, sidebar);
-  width: 57px;
-  height: 100vh;     
-  padding: 0;
-  color: #fff;
-  transition: margin-left .25s, margin-right .25s, width .25s, flex .25s, -ms-flex .25s;
 
-  &-show {
-    width: 200px;
-  }
+    z-index: map-get($z-index, sidebar);
+    color: #fff;
+    
+    &-left{
+        margin-left: 0;     
+        position: fixed;
+        width: 57px;
+        height: 100vh;     
+        padding: 0;
+        transition: margin-left .25s, margin-right .25s, width .25s, flex .25s, -ms-flex .25s;
+        
+        &-show {
+            width: 200px;
+        }
+    }
+
+    &-top{
+        position: sticky;
+        width: 100vw;
+        height: map-get($height, sidebar-top);    
+    }
   
+    
 }

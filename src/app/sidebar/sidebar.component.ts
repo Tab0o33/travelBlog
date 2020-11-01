@@ -11,6 +11,7 @@ export class SidebarComponent {
     @ViewChild('sidebar') sidebar: ElementRef;
 
     @Input() sideBarOpen: boolean;
+    @Input() isPhoneScreen: boolean;
     @Output() toggleSideBar: EventEmitter<any> = new EventEmitter();
 
     items = [

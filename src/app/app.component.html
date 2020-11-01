@@ -2,7 +2,8 @@
 
     <toaster-container [toasterconfig]="notificationService.config"></toaster-container>
 
-    <app-sidebar [sideBarOpen]="sideBarOpen" (toggleSideBar)="toggleSideBar()"></app-sidebar>
+    <app-sidebar [sideBarOpen]="sideBarOpen" [isPhoneScreen]="isPhoneScreen" (toggleSideBar)="toggleSideBar()">
+    </app-sidebar>
     <app-container [containerleft]="containerleft"></app-container>
 
 </div>

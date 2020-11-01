@@ -1,5 +1,6 @@
-<div #sidebar class="navbar-dark blog-sidebar bg-secondary d-flex flex-column justify-content-start align-items-stretch"
-    [ngClass]="{'blog-sidebar-show': sideBarOpen}">
+<div *ngIf="!isPhoneScreen" #sidebar
+    class="navbar-dark blog-sidebar blog-sidebar-left bg-secondary d-flex flex-column justify-content-start align-items-stretch"
+    [ngClass]="{'blog-sidebar-left-show': sideBarOpen}">
     <div class="d-flex justify-content-end">
         <button class="navbar-toggler" type="button" (click)="toggleShowSideBar()">
             <span class="navbar-toggler-icon"></span>
@@ -15,4 +16,14 @@
             </a>
         </li>
     </div>
+</div>
+
+<div *ngIf="isPhoneScreen" #sidebar class="navbar-dark blog-sidebar blog-sidebar-top bg-secondary">
+    <ul class="navbar-nav d-flex flex-row justify-content-between px-2" style="height: 100%;">
+        <li *ngFor="let item of items" routerLinkActive="active" class="nav-item">
+            <a class="nav-link" [routerLink]="item.link">
+                <span class="material-icons">{{item.icon}}</span>
+            </a>
+        </li>
+    </ul>
 </div>
