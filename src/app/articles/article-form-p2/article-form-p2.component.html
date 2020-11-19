@@ -1,0 +1,26 @@
+<div class="h1 text-capitalize text-secondary d-flex justify-content-center">Formulaire</div>
+<div class="bg-light py-3 mx-5 shadow border">
+    <div class="row">
+        <div class="col ">
+            <h3>Les sous-parties</h3>
+            <form [formGroup]="subpartsForm" (ngSubmit)="onSubmit()">
+                <h5>{{currentSubpart.title}}</h5>
+                <div formArrayName="contents">
+                    <div *ngFor="let contentControl of getContents().controls; let i = index" class="form-group">
+                        <textarea *ngIf="currentContentType[i] == 'text'" class="form-control" rows="4"
+                            [formControlName]="i"></textarea>
+                        <input *ngIf="currentContentType[i] == 'image'" type="file" (change)="detectFiles($event, i)"
+                            class="form-control-file" [formControlName]="i" accept="image/*">
+                    </div>
+                    <button type="button" class="btn btn-success" (click)="addContent('text')">Ajouter un
+                        texte</button>
+                    <button type="button" class="btn btn-success" (click)="addContent('image')">Ajouter une img</button>
+                </div>
+
+                <button class="btn btn-primary" type="submit" [disabled]="subpartsForm.invalid">
+                    {{isLastSubpart() ? 'Enregistrer l\'article' : 'next'}}
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

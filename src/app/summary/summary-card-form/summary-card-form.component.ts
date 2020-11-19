@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { listLocales } from 'ngx-bootstrap/chronos';
-import { SummaryService } from '../summary.service';
 import { NotificationService } from '../../services/notification.service';
+import { CountryService } from 'src/app/services/country.service';
 
 @Component({
     selector: 'app-summary-card-form',
@@ -29,13 +29,12 @@ export class SummaryCardFormComponent implements OnInit {
 
     constructor(
         private localeService: BsLocaleService,
-        private summaryService: SummaryService,
-        private notificationService: NotificationService
+        private countryService: CountryService
     ) { }
 
     ngOnInit(): void {
         this.localeService.use(this.locale);
-        this.summaryService.getCountries$().subscribe(
+        this.countryService.getCountries$().subscribe(
             (countries: { label: string, position: number }[]) => {
                 countries.sort((a, b) => a.position - b.position);
                 this.countriesDDL = countries.map(c => c.label);
@@ -54,23 +53,6 @@ export class SummaryCardFormComponent implements OnInit {
 
     detectFiles(event) {
         this.imageFile = event.target.files[0];
-    }
-
-    addCountry(newCountry: string) {
-        const position = this.countriesDDL.length + 1;
-        const label = `${position} - ${newCountry}`;
-        const newCountryObj = { label, position };
-        this.summaryService.addCountry$(newCountryObj).subscribe(
-            () => {
-                this.countriesDDL.push(label);
-                this.notificationService.popToastSuccess();
-                this.newCountry = '';
-            },
-            () => {
-                this.notificationService.popToastError();
-                this.newCountry = '';
-            },
-        );
     }
 
 }

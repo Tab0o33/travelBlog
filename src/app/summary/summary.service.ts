@@ -99,18 +99,5 @@ export class SummaryService {
         return apiCall;
     }
 
-    getCountries$(): Observable<{ label: string, position: number }[]> {
-        const token = this.authService.token;
-        return this.http.get<{ label: string, position: number }[]>(`http://${this.properties.hostAPI}/api/summaryCountry`,
-            { headers: { Authorization: token } }
-        );
-    }
 
-    addCountry$(newCountry: { label: string, position: number }): Observable<any> {
-        const token = this.authService.token;
-        return this.http.post(`http://${this.properties.hostAPI}/api/summaryCountry`,
-            newCountry,
-            { headers: { Authorization: token } }
-        );
-    }
 }

@@ -17,11 +17,12 @@ import { ContainerComponent } from './container/container.component';
 // Services
 import { AuthGuard } from './services/auth-guard.service';
 import { NotificationService } from './services/notification.service';
+import { CountryService } from './services/country.service';
+import { Properties } from './services/properties.service';
 
 // Modules internes
 import { AppRoutingModule } from './app-routing.module';
 import { ComponentModule } from './component.module';
-import { Properties } from './services/properties.service';
 
 @NgModule({
     declarations: [
@@ -42,6 +43,7 @@ import { Properties } from './services/properties.service';
     providers: [
         AuthGuard,
         NotificationService,
+        CountryService,
         Properties
     ],
     bootstrap: [AppComponent]

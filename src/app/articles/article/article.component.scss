@@ -1,0 +1,13 @@
+.article {
+
+  &-map {
+    width: 40px;
+    height: 40px;
+  }
+
+  &-paragraph {
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
+}

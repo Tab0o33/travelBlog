@@ -1,0 +1,3 @@
+<app-article-form *ngIf="step == 1" (submitForm)="createArticleFirstPart($event)"></app-article-form>
+<app-article-form-p2 *ngIf="step == 2" [subparts]="article.values.subparts" (submitForm)="addNewArticle(article)">
+</app-article-form-p2>

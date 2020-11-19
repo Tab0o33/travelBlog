@@ -1,3 +1,4 @@
-<div class="blog-right-side" [ngClass]="{'blog-right-side-right': !containerleft}">
-  <router-outlet></router-outlet>
+<div style="border: rgb(17, 0, 255) solid 1px;" class="blog-right-side bg-light"
+    [ngClass]="{'blog-right-side-small': !containerleft && !isPhoneScreen, 'blog-right-side-big': containerleft && !isPhoneScreen , 'blog-right-side-full': isPhoneScreen}">
+    <router-outlet></router-outlet>
 </div>

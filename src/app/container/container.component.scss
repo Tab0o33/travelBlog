@@ -1,13 +1,23 @@
 @import "../../styles.scss";
 
-
 .blog-right-side {
-    width: calc(100vw - 57px);  
-    margin-left: 57px; 
-    transition: margin-left .25s, margin-right .25s, width .25s, flex .25s, -ms-flex .25s;
+  transition: margin-left .25s, margin-right .25s, width .25s, flex .25s, -ms-flex .25s;
 
-    &-right {
-        margin-left: 200px; 
-        width: calc(100vw - 200px);   
-    }
+  &-big {
+    width: calc(100vw - 57px);
+    margin-left: 57px;
+    min-height: 100vh;
+  }
+
+  &-small {
+    margin-left: 200px;
+    width: calc(100vw - 200px);
+    min-height: 100vh;
+  }
+
+  &-full {
+    margin-left: 0px;
+    width: 100vw;
+    min-height: calc(100vh - #{map-get($height, sidebar-top)});
+  }
 }

@@ -8,12 +8,35 @@
     </div>
 
     <div class="navbar-nav mt-4">
-        <li routerLinkActive="active">
-            <a *ngFor="let item of items" class="nav-item nav-link d-flex"
+        <li *ngFor="let item of items" class="py-1 border-top border-bottom border-light" routerLinkActive="active">
+            <a *ngIf="!item.collapse" class="nav-item nav-link d-flex" (click)="closeEachToggleableItem()"
                 [ngClass]="{'justify-content-center':!sideBarOpen}" [routerLink]="item.link">
                 <span class="material-icons" [ngClass]="{'ml-2':sideBarOpen,'mr-2':sideBarOpen}">{{item.icon}}</span>
-                <span *ngIf="sideBarOpen">{{item.label}}</span>
+                <span *ngIf="sideBarOpen" class="h5">{{item.label}}</span>
             </a>
+            <a *ngIf="item.collapse" class="nav-item nav-link d-flex"
+                [ngClass]="{'justify-content-center':!sideBarOpen}" data-toggle="collapse"
+                data-target="#sidebarCountriesCollapse" role="button" aria-expanded="false"
+                aria-controls="sidebarCountriesCollapse" (click)="toggleList(item)">
+                <span class="material-icons" [ngClass]="{'ml-2':sideBarOpen,'mr-2':sideBarOpen}">{{item.icon}}</span>
+                <span *ngIf="sideBarOpen" class="h5">{{item.label}}</span>
+                <div *ngIf="sideBarOpen" class="ml-auto">
+                    <span class="material-icons" data-toggle="collapse" data-target="#sidebarCountriesCollapse"
+                        role="button" aria-expanded="false" aria-controls="sidebarCountriesCollapse">
+                        {{item.toggle ? 'expand_less' : 'expand_more'}}
+                    </span>
+                </div>
+            </a>
+            <div *ngIf="item.collapse && item.toggle && sideBarOpen" class="collapse bg-secondary"
+                id="sidebarCountriesCollapse">
+                <div class="d-flex flex-column" style="height: 100%; cursor: pointer;">
+                    <div *ngFor="let subpart of item.subparts" routerLinkActive="active"
+                        class="text-capitalize py-2 pl-2 bg-dark border-bottom nav-item nav-link"
+                        [routerLink]="subpart.link">
+                        {{subpart.label}}
+                    </div>
+                </div>
+            </div>
         </li>
     </div>
 </div>
@@ -21,9 +44,24 @@
 <div *ngIf="isPhoneScreen" #sidebar class="navbar-dark blog-sidebar blog-sidebar-top bg-secondary">
     <ul class="navbar-nav d-flex flex-row justify-content-between px-2" style="height: 100%;">
         <li *ngFor="let item of items" routerLinkActive="active" class="nav-item">
-            <a class="nav-link" [routerLink]="item.link">
+            <a *ngIf="!item.collapse" class="nav-link" [routerLink]="item.link" (click)="closeCollapseTopBar()">
+                <span class="material-icons">{{item.icon}}</span>
+            </a>
+            <a *ngIf="item.collapse" class="nav-link" data-toggle="collapse" data-target="#sidebarTopCountriesCollapse"
+                aria-expanded="false" aria-controls="sidebarTopCountriesCollapse" (click)="selectedItemColapse = item">
                 <span class="material-icons">{{item.icon}}</span>
             </a>
         </li>
     </ul>
+
+    <div *ngIf="selectedItemColapse" class="collapse bg-dark" id="sidebarTopCountriesCollapse">
+        <div class="d-flex flex-column" style="height: 100%; cursor: pointer;">
+            <div *ngFor="let subpart of selectedItemColapse.subparts" routerLinkActive="active"
+                class="text-capitalize py-2 pl-2 bg-dark border-bottom nav-item nav-link" [routerLink]="subpart.link"
+                data-toggle="collapse" data-target="#sidebarTopCountriesCollapse" aria-expanded="false"
+                aria-controls="sidebarTopCountriesCollapse">
+                {{subpart.label}}
+            </div>
+        </div>
+    </div>
 </div>

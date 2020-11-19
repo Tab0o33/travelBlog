@@ -1,0 +1,62 @@
+<div class="h1 text-capitalize text-secondary d-flex justify-content-center">Formulaire</div>
+<div class="d-flex justify-content-center bg-light py-3 mx-5 shadow border" style=" min-width: 230px">
+    <div class="row">
+        <form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
+
+            <div class="form-group">
+                <label for="name">
+                    Nom
+                </label>
+                <input type="text" id="name" class="form-control" formControlName="name">
+            </div>
+
+            <div class="form-group">
+                <label for="firstDay">
+                    Date de début
+                </label>
+                <input type="text" id="firstDay" formControlName="firstDay" placeholder="Datepicker"
+                    class="form-control" [bsConfig]="bsConfig" bsDatepicker>
+            </div>
+
+            <div class="form-group">
+                <label for="lastDay">
+                    Date de fin
+                </label>
+                <input type="text" id="lastDay" formControlName="lastDay" placeholder="Datepicker" class="form-control"
+                    [bsConfig]="bsConfig" #dp="bsDatepicker" bsDatepicker>
+            </div>
+
+            <div class="form-group">
+                <label for="country">Pays</label>
+                <select class="form-control" id="country" formControlName="country">
+                    <option *ngFor="let country of countriesDDL" [value]="country">{{country}}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="image">Choix de l'image</label>
+                <input type="file" (change)="detectFiles($event)" class="form-control-file" id="image" name="image"
+                    accept="image/*">
+            </div>
+
+            <div class="form-group">
+                <label for="mapImageAlt">
+                    alt de l'image
+                </label>
+                <input type="text" id="mapImageAlt" class="form-control" formControlName="mapImageAlt">
+            </div>
+
+            <div formArrayName="subparts">
+                <h3>Les sous-parties</h3>
+                <div *ngFor="let subpartControl of getSubparts().controls; let i = index" class="form-group">
+                    <input type="text" class="form-control" [formControlName]="i">
+                </div>
+                <button type="button" class="btn btn-success" (click)="addSubparts()">Ajouter une sous-partie</button>
+            </div>
+
+            <button class="btn btn-primary" type="submit" [disabled]="articleForm.invalid">Valder les infos
+                principales</button>
+
+        </form>
+    </div>
+</div>

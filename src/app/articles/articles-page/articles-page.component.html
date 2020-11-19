@@ -1,0 +1,52 @@
+<div *ngIf="articles$ | async as artObs">
+    <div *ngIf="routeId <= artObs.length">
+        <div class="h1 text-capitalize text-secondary d-flex justify-content-center">pays</div>
+        <div class="h3 text-secondary d-flex justify-content-center"><em>C'est parti pour l'aventure</em></div>
+        <app-article [article]="artObs[routeId - 1]"></app-article>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" [ngClass]="{disabled: routeId < 2}"><a class="page-link"
+                        [routerLink]="'/countries/' + routeCountry + '/' + (routeId-1)">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item" [ngClass]="{'active': routeId == 1}">
+                    <a class="page-link" [routerLink]="'/countries/' + routeCountry + '/1'">1</a>
+                </li>
+                <li *ngIf="artObs.length > 6 && routeId > 3" class="page-item disabled">
+                    <a class="page-link">...</a>
+                </li>
+                <li *ngFor="let i of pagination" class="page-item" [ngClass]="{'active': routeId == i}">
+                    <a class="page-link" [routerLink]="'/countries/' + routeCountry + '/' + (i)">{{i}}</a>
+                </li>
+                <li *ngIf="artObs.length > 6 && routeId < artObs.length - 2" class="page-item disabled">
+                    <a class="page-link">...</a>
+                </li>
+                <li class="page-item" [ngClass]="{'active': routeId == artObs.length}">
+                    <a class="page-link"
+                        [routerLink]="'/countries/' + routeCountry + '/' + artObs.length">{{artObs.length}}</a>
+                </li>
+                <li class="page-item" [ngClass]="{disabled: routeId >= artObs.length}"><a class="page-link"
+                        [routerLink]="'/countries/' + routeCountry + '/' + (routeId+1)">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div *ngIf="routeId > artObs.length" class="alert alert-info m-3 shadow" role="alert">
+        <div *ngIf="artObs.length > 0">Nous n'avons pas encore rédigé autant d'article sur ce pays.</div>
+        <div *ngIf="artObs.length == 0">Nous n'avons rédigé aucun article sur ce pays.</div>
+    </div>
+</div>
+
+<button *ngIf="authService.isLoggedIn()" type="button" class="btn bg-primary blog-btn-add d-flex justify-content-center"
+    (click)="goToNewArticleForm()">
+    <span class="material-icons md-36">
+        add_circle_outline
+    </span>
+</button>

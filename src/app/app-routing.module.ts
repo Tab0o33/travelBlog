@@ -8,12 +8,17 @@ import { AddSummaryCardComponent } from './summary/add-summary-card/add-summary-
 
 import { AuthGuard } from './services/auth-guard.service';
 import { EditSummaryCardComponent } from './summary/edit-summary-card/edit-summary-card.component';
+import { ArticlesPageComponent } from './articles/articles-page/articles-page.component';
+import { AddArticlePageComponent } from './articles/add-article-page/add-article-page.component';
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'summary', component: SummaryComponent },
     { path: 'summary/new-card', canActivate: [AuthGuard], component: AddSummaryCardComponent },
     { path: 'summary/edit-card/:id', canActivate: [AuthGuard], component: EditSummaryCardComponent },
+    { path: 'countries', component: ArticlesPageComponent },
+    { path: 'countries/:country/:id', component: ArticlesPageComponent },
+    { path: 'countries/new', canActivate: [AuthGuard], component: AddArticlePageComponent },
     { path: 'gallery', component: GalleryComponent },
     { path: '', component: HomeComponent }
 ];
