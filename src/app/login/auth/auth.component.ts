@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class AuthComponent implements OnInit {
 
     constructor(
         private authService: AuthService,
+        private router: Router,
         private formBuilder: FormBuilder
     ) { }
 
@@ -38,6 +40,7 @@ export class AuthComponent implements OnInit {
             () => {
                 this.isAuth = true;
                 this.badAuthent = false;
+                this.router.navigate([`/home`]);
             },
             (error) => {
                 this.badAuthent = true;

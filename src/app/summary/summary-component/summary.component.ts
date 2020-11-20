@@ -2,7 +2,7 @@ import { OnDestroy } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AuthService } from '../../home/auth.service';
+import { AuthService } from '../../login/auth.service';
 import { NotificationService } from '../../services/notification.service';
 import { SummaryService } from '../summary.service';
 
