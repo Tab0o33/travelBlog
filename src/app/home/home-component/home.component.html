@@ -1,1 +1,65 @@
-<app-auth></app-auth>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="h2 text-secondary text-center py-3">
+                <em>En route vers l'Amérique du Sud</em>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <img class="article-map my-1 img-thumbnail shadow-sm" [src]="'/assets/django.jpg'" [alt]="'photo de nous'"
+                style="width: 100%;">
+        </div>
+        <div class="col-12 col-md-6 text-justify">
+            <h5><em>Qui sommes nous ? Pourquoi ce voyage ?</em></h5>
+            {{introMessage$ | async}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button type="button" class="btn btn-primary" (click)="openModal(template)">Ajouter un
+                commentaire</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <app-comment *ngFor="let comment of sortBy(comments, 'postDate')" [comment]="comment"
+                (addSubComment)="openModal(template, comment)">
+            </app-comment>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<ng-template #template>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="commentModalLabel">Commentaire</h5>
+            <button type="button" class="close" aria-label="Close" (click)="emptyCommentValues()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="pseudo">
+                    Pseudo
+                </label>
+                <input type="text" id="pseudo" class="form-control" [(ngModel)]="newComment.pseudo">
+            </div>
+            <div class="form-group">
+                <label for="message">
+                    Message
+                </label>
+                <textarea id="message" class="form-control" rows="4" [(ngModel)]="newComment.message"></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="emptyCommentValues()">Annuler</button>
+            <button type="button" class="btn btn-primary"
+                [disabled]="newComment.pseudo === '' || newComment.message === ''"
+                (click)="validateNewComment()">Valider</button>
+        </div>
+    </div>
+</ng-template>

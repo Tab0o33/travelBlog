@@ -1,0 +1,11 @@
+.comment-button {
+  &:hover {
+    background-color: rgb(210, 210, 210);
+  }
+}
+
+.btn-link-cstm {
+  &:hover {
+    text-decoration: underline
+  }
+}

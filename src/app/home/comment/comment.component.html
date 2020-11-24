@@ -1,0 +1,55 @@
+<div class="d-flex flex-row align-items-center rounded border shadow-sm bg-white my-2">
+    <div class="align-self-stretch rounded-left px-1"
+        [ngClass]="{'bg-primary': !comment.isAdminPost, 'bg-success': comment.isAdminPost}"></div>
+    <div class="container">
+        <div class="row p-2">
+            <div class="col">
+                <div class="row">
+                    <div class="mr-1 "
+                        [ngClass]="{'text-primary': !comment.isAdminPost, 'text-success': comment.isAdminPost}">
+                        {{comment.pseudo}}</div>
+                    <div class="font-italic">{{getFormattedDate()}}</div>
+                </div>
+                <div class="row">{{comment.message}}</div>
+                <div class="row border-top border-bottom">
+                    <div class="col-6 d-flex justify-content-center">
+                        <button class="btn comment-button d-flex px-2" (click)="addSubComment.emit()">
+                            <span class="material-icons mr-1">
+                                add_comment
+                            </span>
+                            <span>Commenter</span>
+                        </button>
+                    </div>
+                    <div *ngIf="comment.subComments.length > 0" class="col-6 d-flex justify-content-center">
+                        <button class="btn btn-link-cstm d-flex px-2"
+                            (click)="displaySubComments = !displaySubComments">
+                            <span>{{comment.subComments.length}} commentaires</span>
+                        </button>
+                    </div>
+                </div>
+                <div *ngIf="displaySubComments">
+                    <div *ngFor="let subComment of comment.subComments">
+                        <div class="d-flex flex-row align-items-center rounded border shadow-sm bg-white my-2">
+                            <div class="align-self-stretch rounded-left px-1"
+                                [ngClass]="{'bg-primary': !subComment.isAdminPost, 'bg-success': subComment.isAdminPost}">
+                            </div>
+                            <div class="container">
+                                <div class="row p-2">
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="mr-1"
+                                                [ngClass]="{'text-primary': !subComment.isAdminPost, 'text-success': subComment.isAdminPost}">
+                                                {{subComment.pseudo}}</div>
+                                            <div class="font-italic">{{getFormattedDate()}}</div>
+                                        </div>
+                                        <div class="row">{{subComment.message}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
