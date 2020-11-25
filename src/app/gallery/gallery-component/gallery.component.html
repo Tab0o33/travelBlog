@@ -11,21 +11,27 @@
     </div>
 </div>
 
-<div *ngIf="isModalOpen" class="modal fade show" id="GalleryModal" role="dialog" data-backdrop="static">
+
+
+<div *ngIf="displayImgModal" class="modal fade show" id="GalleryModal" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <img *ngIf="selectedItem && selectedItem.type == 'picture'"
+            [src]="selectedItem ? '/assets/'+ selectedItem.name : ''" [alt]="selectedItem ? selectedItem.alt: ''"
+            class="rounded mx-auto d-block">
+    </div>
+</div>
+
+<div *ngIf="displayVideoModal" class="modal fade show" id="GalleryModal" role="dialog" data-backdrop="static">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" (click)="isModalOpen = false">&times;</button>
+                <button type="button" class="close" data-dismiss="modal"
+                    (click)="displayVideoModal = false">&times;</button>
             </div>
-            <div class="modal-body">
-                <img *ngIf="selectedItem && selectedItem.type == 'picture'"
-                    [src]="selectedItem ? '/assets/'+ selectedItem.name : ''"
-                    [alt]="selectedItem ? selectedItem.alt: ''" class="rounded mx-auto d-block">
-                <video *ngIf="selectedItem && selectedItem.type == 'video'" class="modal-video" controls>
-                    <source src="/assets/bresil.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
+            <video *ngIf="selectedItem && selectedItem.type == 'video'" class="modal-video" controls>
+                <source src="/assets/bresil.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
     </div>
 </div>

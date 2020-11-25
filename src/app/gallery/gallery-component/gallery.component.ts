@@ -19,13 +19,20 @@ export class GalleryComponent {
     ];
 
     selectedItem: any;
-    isModalOpen = false;
+    displayImgModal = false;
+    displayVideoModal = false;
 
     constructor() { }
 
     displayItem(item: any): void {
         this.selectedItem = item;
-        this.isModalOpen = true;
+        if (item.type === 'video') {
+            this.displayImgModal = false;
+            this.displayVideoModal = true;
+        } else {
+            this.displayVideoModal = false;
+            this.displayImgModal = true;
+        }
     }
 
 }
