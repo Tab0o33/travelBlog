@@ -1,21 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
-$grid-breakpoints: (
-  xs: 0,
+$grid-breakpoints: (xs: 0,
   sm: 576px,
   md: 768px,
   lg: 992px,
-  xl: 1200px
+  xl: 1200px);
+
+$z-index: (sidebar: 100,
+  addButton: 90,
 );
 
-$z-index: (
-  sidebar: 100
-);
+$height: (sidebar-top: 45px);
 
-$height: (
-  sidebar-top: 45px
-);
+.material-icons.md-18 {
+  font-size: 18px;
+}
 
-.material-icons.md-18 { font-size: 18px; }
-.material-icons.md-24 { font-size: 24px; }
-.material-icons.md-36 { font-size: 36px; }
-.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-24 {
+  font-size: 24px;
+}
+
+.material-icons.md-36 {
+  font-size: 36px;
+}
+
+.material-icons.md-48 {
+  font-size: 48px;
+}
+
+.blog-btn-add {
+  position: -webkit-sticky;
+  position: sticky;
+  top: calc(100vh - 80px);
+  left: calc(100vw - 80px);
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  box-shadow: 5px 5px 10px gray;
+  z-index: map-get($z-index, sidebar);
+}

@@ -1,5 +1,13 @@
 <h2>Responsive Image Gallery</h2>
 <h4>Colombie</h4>
+
+<button *ngIf="authService.isLoggedIn()" type="button"
+    class="btn bg-primary blog-btn-add d-flex justify-content-center">
+    <span class="material-icons md-36">
+        add_circle_outline
+    </span>
+</button>
+
 <div class="px-3">
     <div class="container gallery">
         <div class="row">
@@ -10,8 +18,6 @@
         </div>
     </div>
 </div>
-
-
 
 <div *ngIf="displayImgModal" class="modal fade show" id="GalleryModal" role="dialog">
     <div class="modal-dialog modal-dialog-centered modal-lg">

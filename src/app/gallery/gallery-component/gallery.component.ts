@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/login/auth.service';
 
 @Component({
     selector: 'app-gallery',
@@ -22,7 +23,7 @@ export class GalleryComponent {
     displayImgModal = false;
     displayVideoModal = false;
 
-    constructor() { }
+    constructor(public authService: AuthService) { }
 
     displayItem(item: any): void {
         this.selectedItem = item;

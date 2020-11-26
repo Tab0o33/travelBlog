@@ -1,3 +1,10 @@
+<button *ngIf="authService.isLoggedIn()" type="button" class="btn bg-primary blog-btn-add d-flex justify-content-center"
+    (click)="goToNewArticleForm()">
+    <span class="material-icons md-36">
+        add_circle_outline
+    </span>
+</button>
+
 <div *ngIf="articles$ | async as artObs">
     <div *ngIf="routeId <= artObs.length">
         <div class="h1 text-capitalize text-secondary d-flex justify-content-center">pays</div>
@@ -43,10 +50,3 @@
         <div *ngIf="artObs.length == 0">Nous n'avons rédigé aucun article sur ce pays.</div>
     </div>
 </div>
-
-<button *ngIf="authService.isLoggedIn()" type="button" class="btn bg-primary blog-btn-add d-flex justify-content-center"
-    (click)="goToNewArticleForm()">
-    <span class="material-icons md-36">
-        add_circle_outline
-    </span>
-</button>
