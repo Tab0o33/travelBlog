@@ -1,47 +1,58 @@
 @import "../../../styles.scss";
 
-.picture-block{
-  height: 150px;
-  width: 220px;
+.picture-block {
+  height: 60px;
 }
 
-img{
+@media screen and (min-width: 576px) and (max-width: 767px) {
+  .picture-block {
+    height: 80px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .picture-block {
+    height: 100px;
+  }
+}
+
+img {
   width: 100%;
   height: 100%;
   opacity: 0.8;
 
-  &:hover{
+  &:hover {
     opacity: 1;
     cursor: pointer;
   }
 }
 
-video{
+video {
   width: 100%;
   height: 100%;
   opacity: 0.8;
 }
 
-.containerAll{
+.containerAll {
   width: 100%;
   height: 100%;
   position: relative;
 }
 
-.box{          
+.box {
   width: 100%;
   height: 100%;
   position: absolute;
 
 }
 
-.video-play{
-  &:hover{
+.video-play {
+  &:hover {
     opacity: 1;
     cursor: pointer;
   }
 }
 
-.stack-top{
+.stack-top {
   z-index: 9;
 }

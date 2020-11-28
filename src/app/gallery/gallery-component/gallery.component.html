@@ -11,10 +11,13 @@
     <h4>{{country.label}}</h4>
 
     <div class="px-3">
-        <div class="container gallery">
+        <div class="container">
             <div class="row">
-                <app-picture-card *ngFor="let item of country.items" [item]="item" (clickOnPicture)="displayItem(item)">
-                </app-picture-card>
+                <div *ngFor="let item of country.items" class="col-4 col-md-3 col-lg-2">
+                    <app-picture-card [item]="item" class="row" (clickOnPicture)="displayItem(item)">
+                    </app-picture-card>
+                </div>
+
             </div>
         </div>
     </div>
