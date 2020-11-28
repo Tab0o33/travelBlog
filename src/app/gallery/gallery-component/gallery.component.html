@@ -1,29 +1,29 @@
-<h2>Responsive Image Gallery</h2>
-<h4>Colombie</h4>
+<h3>Responsive Image Gallery</h3>
 
-<button *ngIf="authService.isLoggedIn()" type="button"
-    class="btn bg-primary blog-btn-add d-flex justify-content-center">
+<button *ngIf="authService.isLoggedIn()" type="button" class="btn bg-primary blog-btn-add d-flex justify-content-center"
+    (click)="openModal(template)">
     <span class="material-icons md-36">
         add_circle_outline
     </span>
 </button>
 
-<div class="px-3">
-    <div class="container gallery">
-        <div class="row">
+<div *ngFor="let country of countries">
+    <h4>{{country.label}}</h4>
 
-            <app-picture-card *ngFor="let item of items" [item]="item" (clickOnPicture)="displayItem(item)">
-            </app-picture-card>
-
+    <div class="px-3">
+        <div class="container gallery">
+            <div class="row">
+                <app-picture-card *ngFor="let item of country.items" [item]="item" (clickOnPicture)="displayItem(item)">
+                </app-picture-card>
+            </div>
         </div>
     </div>
 </div>
 
 <div *ngIf="displayImgModal" class="modal fade show" id="GalleryModal" role="dialog">
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <img *ngIf="selectedItem && selectedItem.type == 'picture'"
-            [src]="selectedItem ? '/assets/'+ selectedItem.name : ''" [alt]="selectedItem ? selectedItem.alt: ''"
-            class="rounded mx-auto d-block">
+        <img *ngIf="selectedItem && selectedItem.type == 'picture'" [src]="selectedItem ? selectedItem.url : ''"
+            [alt]="selectedItem ? selectedItem.alt: ''" class="rounded mx-auto d-block">
     </div>
 </div>
 
@@ -41,3 +41,32 @@
         </div>
     </div>
 </div>
+
+<!-- addModal -->
+<ng-template #template>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="commentModalLabel">Ajout de média</h5>
+            <button type="button" class="close" aria-label="Close" (click)="emptyCommentValues()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="pseudo">
+                    Pays
+                </label>
+                <input type="text" id="pseudo" class="form-control" [(ngModel)]="selectedCountry">
+            </div>
+            <div class="form-group">
+                <label for="image">Choix de l'image</label>
+                <input type="file" (change)="detectFiles($event)" class="form-control-file" id="image" name="image"
+                    accept="image/*">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="emptyCommentValues()">Annuler</button>
+            <button type="button" class="btn btn-primary" (click)="validateNewComment()">Valider</button>
+        </div>
+    </div>
+</ng-template>
